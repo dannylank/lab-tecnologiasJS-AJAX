@@ -1,0 +1,13 @@
+(function() {
+  $("#curl").val("Page location is: " + window.location.href + 'texto.txt');
+})();
+
+function getcontetns() {
+  $.ajax({
+    url: window.location.href + 'texto.txt',
+    async: false,
+    success: function(data) {
+      $('#contenidos').append(data);
+    }
+  });
+}
