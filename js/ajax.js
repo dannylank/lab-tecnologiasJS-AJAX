@@ -11,7 +11,7 @@
   
     function funcAjax() {
       $.ajax({
-        url: window.location.href + '../texto.txt',
+        url: window.location.href + 'texto.txt',
         async: false,
         success: function(data,status, xhr) {
           let headers = xhr.getAllResponseHeaders();
