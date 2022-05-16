@@ -23,7 +23,7 @@ function palindromo(pal) {
     var del = /[^A-Za-z0-9]/g;
     var string = str.toLowerCase().replace(del, '');
     let vocals = string.replace(/[^a,e,i,o,u,A,E,I,O,U]/g, '');
-    console.log(vocals);
+    alert(vocals);
   }
   
   function countvocals(string) {
