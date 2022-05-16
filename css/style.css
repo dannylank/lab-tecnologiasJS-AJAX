@@ -1,6 +1,7 @@
 html, body {
     height: 100%;
     width: 100%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   }
   li, div, button, textarea, label {
     margin-top: 15px;
@@ -15,7 +16,10 @@ html, body {
     text-align:center;
   }
 
-  container{
-    width:600%;
+  .container{
+    width:600px;
     margin: 0 auto;
+  }
+  h1{
+    color:lightblue;
   }
