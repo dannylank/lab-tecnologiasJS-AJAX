@@ -1,26 +1,157 @@
+<!DOCTYPE html>
+<html>
 
-(function() {
-    $("#curl").val("Page location is: " + window.location.href);
-  })();
-  
-  function getcontetns() {
-    $("#estado").css("background-color", "orange");
-    $("#estado").html('Cargando...');
-   
-    setTimeout(funcAjax, 2000);
-  
-    function funcAjax() {
-      $.ajax({
-        url: window.location.href + 'texto.txt',
-        async: false,
-        success: function(data,status, xhr) {
-          let headers = xhr.getAllResponseHeaders();
-          $('#contenidos').append(data);
-          $("#estado").css("background-color", "lightgreen");
-          $("#estado").html('Completado');
-          $("#headers").append(headers);
-          $("#state").val(xhr.status +', '+ xhr.statusText);
-        }
-      });
-    }
-  }
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Palindrome Checker</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Laboratorio. Tecnologías JavaScript y AJAX</h1>
+        <ol>
+            <li>
+                Detectar si la cadena de entrada en un palíndromo.
+                <blockquote>
+                    <h3>
+                        ¿Qué es un palíndromo?
+                    </h3>
+                    <p>
+                        La palabra palíndromo es de hecho de origen griego y viene de la construcción "palin dromein",
+                        es decir,
+                        volver atrás, recorrer a la inversa, porque se trata precisamente de eso, de palabras o frases
+                        simétricas que
+                        se pueden transitar en ambos sentidos. Los palíndromos numéricos también existen, aunque se
+                        conocen como
+                        capicúa: 1331, 8008, 353.
+                    </p>
+                    <p>
+                        Pero, para complicar el juego, también una frase puede ser un palíndromo. El ejemplo clásico, el
+                        que recoge el
+                        diccionario de la Real Academia de la Lengua Española es: "Dábale arroz a la zorra el abad".
+                        Pero hay muchas,
+                        muchísimas más: <em>Somos o no somos, Isaac no ronca así, Sé verlas al revés, Amó la paloma,
+                            Anita lava la
+                            tina, Luz azul, Yo hago yoga hoy, Ana lava lana…</em>
+                    </p>
+                </blockquote>
+                <div>
+                    <form>
+                        <label>Ingrese el palíndromo en el campo de texto</label>
+                        <input id="pal_intro" type="text" />
+                        <button onclick="palindromo(document.getElementById('pal_intro').value)">Verificar</button>
+                    </form>
+                </div>
+            </li>
+            <li>
+                Escribe un programa que pida dos números y escriba en la pantalla cual es el mayor.
+                <form style="margin-top:20px">
+                    <label>Numero1:</label>
+                    <input id="number1" type="number" />
+                    <br />
+                    <label>Numero2:</label>
+                    <input id="number2" type="number" />
+                    <br />
+                    <button
+                        onclick="checkMayorMinor(document.getElementById('number1').value,document.getElementById('number2').value)">Comparar</button>
+                </form>
+            </li>
+            <li>
+                Escribe un programa que pida una frase y escriba las vocales que aparecen.
+                <form>
+                    <br />
+                    <label><em>Escriba la frase:</em></label>
+                    <br />
+                    <textarea id="frasetocheck"></textarea>
+                    <br />
+                    <button onclick="xtractvocals(document.getElementById('frasetocheck').value)">Extraer</button>
+                </form>
+            </li>
+            <li>
+                Escribe un programa que pida una frase y escriba cuántas veces aparecen cada una de las vocales.
+                <form>
+                    <label><em>Ingrese la frase:</em></label>
+                    <br />
+                    <textarea id="frase2"></textarea>
+                    <br />
+                    <button onclick="countvocals(document.getElementById('frase2').value)">Verificar</button>
+                </form>
+                <div id="resutl"></div>
+            </li>
+
+        </ol>
+        <hr>
+        ▸ AJAX. A partir de la página web proporcionada, se pide añadir el código necesario para que:
+        <ol>
+            <li>
+                <p>
+                    Al cargar la página, el cuadro de texto debe mostrar por defecto la URL de la propia página.
+                </p>
+                <br />
+                <label>URL Actual:</label>
+                <input id="curl" type="text" style="width:100%" />
+            </li>
+            <li>
+                <p>
+                    Al pulsar el botón Mostrar Contenidos, se debe descargar mediante peticiones AJAX el contenido
+                    correspondiente a
+                    la URL introducida por el usuario. El contenido de la respuesta recibida del servidor en se debe
+                    mostrar en la
+                    zona de Contenidos del archivo.
+                </p>
+                <br />
+                <button id="" onclick="getcontetns()">Mostrar Contenidos</button>
+                <br />
+            </li>
+            <li>
+                <p>
+                    En la zona Estados de la petición se debe mostrar en todo momento el estado en el que se encuentra
+                    la petición
+                    (no iniciada, cargando, completada, etc.).
+                </p>
+
+                <br>
+                <label>Estados de la petición:
+                    <div id="estado">No iniciada</div>
+                    <br>
+                    <label>Contenidos del archivo:</label>
+                    <div>
+                        <textarea id="contenidos" rows="20" cols="70"></textarea>
+                    </div>
+                </label>
+            </li>
+            <li>
+                <p>
+                    Mostrar el contenido de todas las cabeceras de la respuesta del servidor en la zona Cabeceras HTTP
+                    de la
+                    respuesta del servidor.</p>
+                <label>Cabeceras HTTP de la respuesta del servidor:</label>
+                <label><em>Zona Cabeceras HTTP:</em></label>
+                <div>
+                    <textarea id="headers" rows="10" cols="70"></textarea>
+                </div>
+            </li>
+            <li>
+                <p>
+                    Mostrar el código y texto de la respuesta del servidor en la zona Código de estado.
+                </p>
+                <label><em>Código de estado</em></label>
+                <div>
+                    <input id="state" type="text" />
+                </div>
+            </li>
+        </ol>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/script.js"></script>
+    <script src="js/ajax.js"></script>
+</body>
+
+</html>
